@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-var items = [];
+let items = ['Buy Food','Cook'];
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('public'));
+
 app.set('view engine', 'ejs');
 
 app.get("/", function(req,res){
@@ -21,7 +23,7 @@ app.get("/", function(req,res){
 });
 
 app.post('/', function(req,res){
-    var item = req.body.addItem;
+    let item = req.body.addItem;
     items.push(item);
     res.redirect('/');
 })
